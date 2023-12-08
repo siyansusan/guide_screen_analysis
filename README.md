@@ -4,7 +4,7 @@ Code used to bin reads with deletions and analyze the set of guides responsible 
 
 ## Requirements
 
-To run analysis code, you will need to obtain a set of Python packages [AHAB](https://github.com/siyansusan/AHAB.git).
+To run analysis code, you will need to obtain a set of Python packages [TRACER](https://github.com/siyansusan/TRACER.git).
 In order to use these packages, you will have to add them to the PYTHONPATH variable as following, 
 where *\<dirname\>* is the directory with the above packages. 
 
