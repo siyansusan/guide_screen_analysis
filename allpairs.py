@@ -18,13 +18,13 @@ from SamReadGroup import SamReadGroup
 from SamHspFactory import SamHspFactory
 from SamHspClusterer import SamHspClusterer
 from SamAnnotation import SamAnnotation
-from Ahab_allpairs import AhabAllPairs
+from Tracer_allpairs import TracerAllPairs
 
 
 # =========================================================================
 #                         class AllPairsAnalysis
 # =========================================================================
-class AllPairsAnalysis(AhabAllPairs):
+class AllPairsAnalysis(TracerAllPairs):
     def __init__(self, configFile, outputDir):
         super().__init__(configFile)
         config = self.config
@@ -281,7 +281,7 @@ class AllPairsAnalysis(AhabAllPairs):
             self.dump(anno, self.DEBUG_FAILED_FILTER)
             return False
 
-        if anno.lowestPercentIdentity() < ahab.MIN_IDENTITY:
+        if anno.lowestPercentIdentity() < tracer.MIN_IDENTITY:
             self.bin(anno, self.BIN_FAILED_FILTER)
             self.dump(anno, self.DEBUG_FAILED_FILTER)
             return False
@@ -300,8 +300,8 @@ if len(sys.argv) != 4:
     exit(ProgramName.get() + " <settings.config> <filename.sam> <output-dir>\n")
 (configFilename, samFile, outputDir) = sys.argv[1:]
 
-# Instantiate Ahab object
-ahab = AllPairsAnalysis(configFilename, outputDir)
+# Instantiate tracer object
+tracer = AllPairsAnalysis(configFilename, outputDir)
 
 # Process SAM file
 hspFactory = SamHspFactory()
@@ -341,11 +341,11 @@ while True:
     anno = SamAnnotation(HSPs)
 
     # Filter based on alignment quality and target chromosome, etc.
-    if (not ahab.filter(anno)): continue
+    if (not tracer.filter(anno)): continue
 
     # Address cases of 1 HSP, 2 HSPs, 3 HSPs, and >3 HSPs
-    ahab.processCases(anno)
+    tracer.processCases(anno)
     del anno
 
-print(ahab.readsBinned, "reads binned, out of ", readsSeen)
-del ahab  # Call destructor to clean up
+print(tracer.readsBinned, "reads binned, out of ", readsSeen)
+del tracer  # Call destructor to clean up
