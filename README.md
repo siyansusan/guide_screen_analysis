@@ -14,4 +14,4 @@ export PYTHONPATH="<dirname>:$PYTHONPATH"
 
 ## Authors
 
-[Siyan Liu](https://github.com/siyansusan)
+[Siyan Liu](https://github.com/siyansusan) and [Bill Majoros](https://github.com/bmajoros)
